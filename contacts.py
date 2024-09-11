@@ -13,28 +13,22 @@ def print_list():
 		print("{:<7} {:<21} {:<22}".format(index, contact[0], contact[1]))
 		index += 1
 
-def add_contact(contact_list):
-	first = input("Enter first name: ")
-	last = input("Enter last name: ")
-	contact_list.append([first,last])
+def add_contact(contact_list, first_name = "N/A", last_name = "N/A"):
+	contact_list.append([first_name,last_name])
 	return contact_list
 
-def modify_contact(contact_list):
+def modify_contact(contact_list, first_name = "N/A", last_name = "N/A", index = 0):
 	try:
-		index = int(input("Enter index to modify: "))
 		if index < 0 or index >= len(contact_list):		
 			print("Invalid index number.")
 			return False
-		first = input("Enter first name: ")
-		last = input("Enter last name: ")
-		contact_list[index] = [first,last]
+		contact_list[index] = [first_name, last_name]
 		return True
 	except:
 		print("Invalid input.")
 	
-def delete_contact(contact_list):
+def delete_contact(contact_list, index = 0):
 	try:
-		index = int(input("Enter index to modify: "))
 		if index < 0 or int(index) >= len(contact_list):
 			print("Invalid index number.")
 			return False
@@ -42,6 +36,12 @@ def delete_contact(contact_list):
 		return True
 	except:
 		print("Invalid input.")
+		
+def sort_contacts(contact_list, column=0):
+	if column == 0:
+		contact_list.sort()
+	elif column == 1:
+		contact_list.sort(key=lambda contact_list: contact_list[1])
 	
 def print_menu():
 	print("\n     *** TUFFY TITAN CONTACT MAIN MENU ***     ")
@@ -49,5 +49,7 @@ def print_menu():
 	print("2. Add contact")
 	print("3. Modify contact")
 	print("4. Delete contact")
-	print("5. Exit program\n")
+	print("5. Sort list by first name")
+	print("6. Sort list by last name")
+	print("7. Exit program\n")
 	return
